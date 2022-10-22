@@ -8,12 +8,7 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct }) => {
 
         setCurrentPage('Tech Deals')
 
-        axios.get('http://localhost:5000/products')
-            .then(e => {
-                const data = e.data.map(e => e.qty = 0)
-                setProduct(e.data)
-            })
-            .catch(err => console.log(err))
+  
     },[])
 
     const handleQtyChange = e => {
@@ -42,7 +37,7 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct }) => {
 
 
     return (
-        <section className="bg-white dark:bg-gray-900 h-screen">
+        <section className="bg-white dark:bg-gray-900 h-full">
             <div className="container px-6 py-8 mx-auto">
                 <div className="lg:flex lg:-mx-2">
                     <div className="mt-6 lg:mt-0 lg:px-2 ">

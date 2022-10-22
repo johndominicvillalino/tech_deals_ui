@@ -2,9 +2,10 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { baseUrl } from "../helpers/constants"
 import del from '../asset/delete.svg'
+import { Link } from "react-router-dom"
 
 
-const Promotions = ({ setCurrentPage }) => {
+const Promotions = ({ setCurrentPage, products }) => {
 
     const [promos, setPromos] = useState([])
     useEffect(() => {
@@ -35,7 +36,11 @@ const Promotions = ({ setCurrentPage }) => {
             <div className='container mx-auto'>
 
                 <div className="overflow-x-auto relative">
-                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-20">
+                    <Link to='/promotions/create'>
+                        <button className="mt-10 border border-white p-2 rounded-md bg-blue-700 cursor-pointer hover:bg-blue-800">Create a Promotion
+                        </button>
+                    </Link>
+                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-10">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" className="py-3 px-6">

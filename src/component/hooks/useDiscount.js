@@ -2,7 +2,14 @@ import { useState, useEffect } from "react";
 
 function useDiscount(items) {
 
-    const [test,setTest] = useState(items)
+    const addDiscount = items.map(e => {
+        if(e.promotion !== undefined) {
+            
+        }
+    })
+
+
+
     // return test
 }
 

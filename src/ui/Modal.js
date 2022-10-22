@@ -3,8 +3,11 @@ import { Dialog, Transition } from '@headlessui/react'
 import { baseUrl } from '../helpers/constants'
 import axios from 'axios'
 import Spinner from './Spinner'
+import { useNavigate } from 'react-router-dom'
 
 export default function AddProduct({ open, setOpen, setProducts }) {
+
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         name: '',
@@ -12,9 +15,13 @@ export default function AddProduct({ open, setOpen, setProducts }) {
     })
 
     const [isLoading, setIsLoading] = useState(false)
+    const [isMissing, setIsMissing] = useState(false)
+    const [error, setError] = useState('')
 
     const handleChange = e => {
         const { value, name } = e.target
+
+        setIsMissing(false)
 
         setFormData(prev => {
             return {
@@ -28,22 +35,39 @@ export default function AddProduct({ open, setOpen, setProducts }) {
     const handleSubmit = e => {
 
         e.preventDefault()
+        const {name,price} = formData
+        const nameCheck = name.length < 1
+        const priceCheck = price < 1
+
+        if(nameCheck && priceCheck) {
+            setIsMissing(true)
+            setError("Product name and price can't be blank")
+            return
+        } else if(nameCheck) {
+            setIsMissing(true)
+            setError("Product name can't be blank")
+            return
+        } else if(priceCheck){
+            setIsMissing(true)
+            setError("Price can't be blank")
+            return
+        }
 
         setIsLoading(true)
-
-        for (let val in formData) {
-            if (val.length < 1) {
-                alert('noo!')
-                return
-            }
-        }
 
         axios.post(`${baseUrl}/products`, formData)
             .then(e => {
                 setIsLoading(false)
                 setProducts(prev => [...prev,e.data])
+                setOpen(false)
+                navigate('/')
             })
             .catch(err => console.log(err))
+
+            setFormData({
+                name: '',
+                price: '',
+            })
 
     }
 
@@ -81,6 +105,7 @@ export default function AddProduct({ open, setOpen, setProducts }) {
                                                 Create a Product
                                             </Dialog.Title>
                                             <div className="mt-2">
+                                               {isMissing && <span className='text-xs text-red-300'>{error}</span> }
                                             </div>
                                         </div>
                                     </div>
