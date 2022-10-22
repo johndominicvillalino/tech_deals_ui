@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import add from '../asset/add-item.svg'
 
-const Nav = () => {
+const Nav = ({ currentPage,open,setOpen }) => {
   return (
     <>
       <div className="flex flex-wrap place-items-center">
@@ -9,12 +10,21 @@ const Nav = () => {
           <nav className="flex justify-between bg-gray-900 text-white w-screen">
             <div className="px-5 xl:px-12 py-6 flex w-full items-center">
               <a className="text-3xl font-bold font-heading" >
-                Tech Deals
+                {currentPage}
               </a>
+
               <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                 <li><Link className="hover:text-gray-200" to='/'>Products</Link></li>
                 <li><Link className="hover:text-gray-200" to="/promotions">Promotions</Link></li>
               </ul>
+
+              <button onClick={() => setOpen(true)} to='/add-item'>
+                <div className='flex w-[150px] gap-2'>
+                  <img className='w-[25px]' src={add}></img>
+                  <span>Add Product</span>
+                </div>
+              </button>
+
               <div className="hidden xl:flex items-center space-x-5 items-center">
                 <Link className="flex items-center hover:text-gray-200" to="/cart">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,6 +48,8 @@ const Nav = () => {
                 </span>
               </span>
             </Link>
+
+
 
           </nav>
 

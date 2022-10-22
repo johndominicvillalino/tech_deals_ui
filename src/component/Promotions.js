@@ -4,11 +4,12 @@ import { baseUrl } from "../helpers/constants"
 import del from '../asset/delete.svg'
 
 
-const Promotions = () => {
+const Promotions = ({ setCurrentPage }) => {
 
     const [promos, setPromos] = useState([])
     useEffect(() => {
 
+        setCurrentPage('Promotions')
         axios.get(`${baseUrl}/promotions`)
             .then(e => {
                 console.log('data')
@@ -20,12 +21,12 @@ const Promotions = () => {
     }, [])
 
     const handleChange = (e) => {
-        const { id,checked } = e.target
+        const { id, checked } = e.target
         const promotion = promos
         const found = promotion.find(el => el.id == id)
         found.is_active = checked
         setPromos([...promotion])
-    
+
     }
 
 
@@ -33,12 +34,15 @@ const Promotions = () => {
         <div className='h-screen bg-gray-900 flex justify-center text-white'>
             <div className='container mx-auto'>
 
-                {promos.length !== 0 && <div className="overflow-x-auto relative">
+                <div className="overflow-x-auto relative">
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-20">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" className="py-3 px-6">
                                     Promo Description
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                    SKU
                                 </th>
                                 <th scope="col" className="py-3 px-6">
                                     Type
@@ -56,6 +60,9 @@ const Promotions = () => {
                                         <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {e.description}
                                         </th>
+                                        <td className="py-4 px-6">
+                                            {e.id}
+                                        </td>
                                         <td className="py-4 px-6">
                                             {e.promo_type}
                                         </td>
@@ -76,7 +83,7 @@ const Promotions = () => {
                         </tbody>
                     </table>
                 </div>
-                }
+
             </div>
         </div>
     )
