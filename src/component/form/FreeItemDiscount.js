@@ -3,6 +3,7 @@ import MinInput from "./ui/MinInput"
 import DiscountInput from "./ui/DiscountInput"
 import axios from "axios"
 import { baseUrl } from "../../helpers/constants"
+import { MINIMIN_QUANTITY_PURCHASE, MININUM_PURCHASE_VALUE } from "../../helpers/constants"
 
 const FreeItemDiscount = ({ products,setFormData,formData,promoType,setProducts }) => {
 
@@ -61,9 +62,8 @@ const FreeItemDiscount = ({ products,setFormData,formData,promoType,setProducts 
                     </label>
                     <select onChange={handleChange} name="trigger" id="promo_type" className=" text-black py-2 px-5 rounded-md">
                         <option hidden value="">Select a promo Type</option>
-                        <option value="Minimum Purchase Value">Minimum Purchase Value</option>
-                        <option value="Minimum Quantity Purchase">Minimum Quantity Purchase</option>
-                        <option value="Cart Total Purchase">Cart Total Purchase</option>
+                        <option value={MININUM_PURCHASE_VALUE}>Minimum Purchase Value</option>
+                        <option value={MINIMIN_QUANTITY_PURCHASE}>Minimum Quantity Purchase</option>
                     </select>
                 </div>
                 <MinInput handleChange={handleChange} formData={formData}></MinInput>

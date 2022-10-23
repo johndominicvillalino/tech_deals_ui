@@ -13,7 +13,7 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete
 
     const handleQtyChange = e => {
         const {value,id} = e.target
-        if(value < 0) {
+        if(value < 0 || value == undefined) {
             handleDelete(id)
             return
         };

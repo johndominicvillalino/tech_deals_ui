@@ -1,4 +1,6 @@
 
+import { MIN_QUANTITY,MIN_VALUE } from "../../../helpers/constants";
+
 const MinInput = ({handleChange,formData}) => {
 
 
@@ -9,7 +11,7 @@ const MinInput = ({handleChange,formData}) => {
             threshold = <div className="w-1/2 flex flex-col gap-2">
                 <label>
                     Minimum Amount
-                </label><input onChange={handleChange} name="min_value" className=" text-black py-2 px-5 rounded-md"
+                </label><input onChange={handleChange} name={MIN_VALUE} className=" text-black py-2 px-5 rounded-md"
                     type='number'
                     placeholder="0.00"
                 />
@@ -19,19 +21,7 @@ const MinInput = ({handleChange,formData}) => {
             threshold = <div className="w-1/2 flex flex-col gap-2">
                 <label>
                     Minimum Quantity
-                </label><input onChange={handleChange}  name="min_quantity" className=" text-black py-2 px-5 rounded-md"
-                    type='number'
-                    placeholder="0.00"
-                />
-            </div>
-            break;
-
-        case 'Cart Total Purchase':
-            threshold = <div className="w-1/2 flex flex-col gap-2">
-                <label>
-                    Minimum Total Amount
-                </label>
-                <input onChange={handleChange}  name="min_value_cart" className=" text-black py-2 px-5 rounded-md"
+                </label><input onChange={handleChange}  name={MIN_QUANTITY} className=" text-black py-2 px-5 rounded-md"
                     type='number'
                     placeholder="0.00"
                 />

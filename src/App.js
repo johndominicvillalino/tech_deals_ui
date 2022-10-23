@@ -44,8 +44,8 @@ function App() {
       <AddProduct open={open} setProducts={setProducts} setOpen={setOpen}></AddProduct>
       <Routes>
         <Route path='/' element={<Product handleDelete={handleDelete} products={products} setProduct={setProducts} setCurrentPage={setCurrentPage} setCartItems={setCartItems}></Product>}></Route>
-        <Route path='/cart' element={<Cart handleDelete={handleDelete} setCartItems={setCartItems} setCurrentPage={setCurrentPage} cartItems={cartItems}></Cart>}></Route>
-        <Route path='/promotions' element={<Promotions setCurrentPage={setCurrentPage}></Promotions>}></Route>
+        <Route path='/cart' element={<Cart allProducts={products} handleDelete={handleDelete} setCartItems={setCartItems} setCurrentPage={setCurrentPage} cartItems={cartItems}></Cart>}></Route>
+        <Route path='/promotions' element={<Promotions cartItems={cartItems}  products={products} setProducts={setProducts} setCartItems={setCartItems} setCurrentPage={setCurrentPage}></Promotions>}></Route>
         <Route path='promotions/create' element={<AddPromotion setProducts={setProducts} products={products} ></AddPromotion>} ></Route>
       </Routes>
     </>

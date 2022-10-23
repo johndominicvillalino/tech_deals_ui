@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import del from '../asset/delete.svg'
 import { priceFormat } from '../helpers/functions'
 import useDiscount from './hooks/useDiscount'
+import FreeItems from './FreeItems'
 
 
-const Cart = ({ setCurrentPage, cartItems, handleDelete,setCartItems }) => {
+const Cart = ({ setCurrentPage, cartItems, handleDelete,setCartItems, allProducts }) => {
 
     const cartInfo = useDiscount(cartItems)
 
@@ -18,14 +19,15 @@ const Cart = ({ setCurrentPage, cartItems, handleDelete,setCartItems }) => {
         const found = items.find(e => e.id == payload.id)
         switch (action) {
             case 'less':
-                if(found.qty <= 0) return
+                if(found.qty <= 0) {
+                    handleDelete(payload.id)
+                    return
+                }
                 found.qty -= 1;
-        
                 found.total = found.qty * found.price
                 break;
             case 'add':
                 found.qty += 1;
-                
                 found.total = found.qty * found.price
                 break;
             default:
@@ -73,9 +75,9 @@ const Cart = ({ setCurrentPage, cartItems, handleDelete,setCartItems }) => {
                         <tbody>
                             {cartItems.map(e => {
                                 return (<tr key={e.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <td scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {e.name}
-                                    </th>
+                                    </td>
                                     <td className="py-4 px-6">
                                         {e.sku}
                                     </td>
@@ -97,6 +99,7 @@ const Cart = ({ setCurrentPage, cartItems, handleDelete,setCartItems }) => {
                         </tbody>
                     </table>
                 </div>
+                <FreeItems allProducts={allProducts} cartItems={cartItems}></FreeItems>
             </div>
         </div>
     )

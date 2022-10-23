@@ -1,4 +1,5 @@
 import { percentDiscount } from "../../helpers/functions";
+import { MINIMIN_QUANTITY_PURCHASE, MIN_QUANTITY , MININUM_PURCHASE_VALUE,MIN_VALUE, PERCENT_DISCOUNT, SPECIFIC_AMOUNT_DISCOUNT,FREE_ITEM_DISCOUNT} from "../../helpers/constants";
 
 
 
@@ -13,28 +14,33 @@ function useDiscount(items) {
     cartInfo.map(e => {
         const checkPromo = 'promotion' in e
         if(checkPromo) {
-            const {promotion,total,qty} = e
+            const {promotion} = e
             const {promo_type,trigger,} = promotion
 
             let min, checker;
 
              switch (trigger) {
-                case 'Minimum Quantity Purchase':
-                    min = 'min_quantity'
+                case MINIMIN_QUANTITY_PURCHASE:
+                    min = MIN_QUANTITY
                     break;
-                case 'Minimum Purchase Value':
-                    min = 'min_value'
-                    break;
-                case 'Cart Total Purchase':
-                    min = 'min_value_cart'
+                case MININUM_PURCHASE_VALUE:
+                    min = MIN_VALUE
                     break;
                 default:
                     break;
             }
 
             switch (promo_type) {
-                case 'Percent Discount':
-                    checker = percentDiscount(qty,promotion[min],e)
+                case PERCENT_DISCOUNT:
+                    checker = percentDiscount(promotion[min],e,min,promo_type)
+                    return checker;
+                    break;
+                case SPECIFIC_AMOUNT_DISCOUNT:
+                    checker = percentDiscount(promotion[min],e,min,promo_type)
+                    return checker;
+                    break;
+                case FREE_ITEM_DISCOUNT:
+                    checker = percentDiscount(promotion[min],e,min,promo_type)
                     return checker;
                     break;
             

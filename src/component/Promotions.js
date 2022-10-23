@@ -5,7 +5,7 @@ import del from '../asset/delete.svg'
 import { Link } from "react-router-dom"
 
 
-const Promotions = ({ setCurrentPage }) => {
+const Promotions = ({ setCurrentPage, setCartItems, setProducts, products, cartItems }) => {
 
     const [promos, setPromos] = useState([])
     useEffect(() => {
@@ -29,15 +29,29 @@ const Promotions = ({ setCurrentPage }) => {
 
     }
 
+
     const handleDelete = e => {
 
+        const { id, product_id } = e
 
-        axios.delete(`${baseUrl}/promotions`,{params: {id:e}})
-        .then(res => {
-            const filtered = promos.filter(el => el.id != e)
-            setPromos([...filtered])
-        })
-        .catch(err => console.log(err))
+        axios.delete(`${baseUrl}/promotions`, { params: { id } })
+            .then(res => {
+                const filtered = promos.filter(el => el.id != id)
+                setPromos([...filtered])
+                const items = products
+                const itemInCart = cartItems
+                const foundInItem = products.find(el => el.id == product_id)
+                const foundInCart = itemInCart.find(ele => ele.id == product_id)
+                if (foundInItem) {
+                    delete foundInItem.promotion
+                    setProducts([...items])
+                }
+                if (foundInCart) {
+                    delete foundInCart.promotion
+                    setCartItems([...itemInCart])
+                }
+            })
+            .catch(err => console.log(err))
 
     }
 
@@ -91,7 +105,7 @@ const Promotions = ({ setCurrentPage }) => {
                                             ></input>
                                         </td>
                                         <td>
-                                            <img onClick={()=>handleDelete(e.id)} className='w-[20px] cursor-pointer fill-red-600 hover:scale-110 ease-in-out duration-300 ' src={del} />
+                                            <img onClick={() => handleDelete(e)} className='w-[20px] cursor-pointer fill-red-600 hover:scale-110 ease-in-out duration-300 ' src={del} />
                                         </td>
                                     </tr>
                                 )
