@@ -97,7 +97,7 @@ export default function AddProduct({ open, setOpen, setProducts }) {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                            <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg w-full">
                                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     <div className="sm:flex sm:items-start">
                                         <div className="text-center sm:text-left">
@@ -149,12 +149,12 @@ export default function AddProduct({ open, setOpen, setProducts }) {
 
                                                 </div>
                                             </div>
-                                            <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 flex justify-center mb-10 mt-2">
+                                            <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 flex justify-center mb-10 mt-2 items-center">
                                             {isLoading  && <Spinner></Spinner> }
                                                 {!isLoading &&
                                                     <><button
                                                         type="button"
-                                                        className="mt-3 mr-3 inline-flex w-full justify-center rounded-md border bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                                        className="mt-3 mr-3 inline-flex w-[100px] justify-center rounded-md border bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                                         onClick={() => setOpen(false)}
                                                         ref={cancelButtonRef}
                                                     >
@@ -163,9 +163,9 @@ export default function AddProduct({ open, setOpen, setProducts }) {
                                                         <button
                                                             type="submit"
                                                             onClick={handleSubmit}
-                                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                                            className="inline-flex justify-center items-center rounded-md border border-transparent bg-blue-600 text-sm font-medium text-white shadow-sm hover:bg-blue-700 px-4 py-3 sm:mt-0 mt-3  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 w-[100px]"
                                                         >
-                                                            Save
+                                                            <span>Save</span>
                                                         </button>
                                                     </>}
                                             </div>

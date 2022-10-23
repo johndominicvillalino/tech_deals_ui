@@ -4,10 +4,15 @@ import DiscountInput from "./ui/DiscountInput"
 import axios from "axios"
 import { baseUrl } from "../../helpers/constants"
 import { MINIMIN_QUANTITY_PURCHASE, MININUM_PURCHASE_VALUE } from "../../helpers/constants"
+import { validatePromoForm } from "../../helpers/constants"
+import { useNavigate } from "react-router-dom"
 
-const FreeItemDiscount = ({ products,setFormData,formData,promoType,setProducts }) => {
+const FreeItemDiscount = ({ products,setFormData,formData,promoType,setProducts,setError,error,showError,setShowError }) => {
+
+    const navigate = useNavigate()
 
     const handleChange = e => {
+        setShowError(false)
         const { value, name } = e.target
         setFormData(prev => {
             return {
@@ -19,21 +24,30 @@ const FreeItemDiscount = ({ products,setFormData,formData,promoType,setProducts 
 
     const handleSubmit = e => {
         e.preventDefault()
+        const validate = validatePromoForm(formData)
+        if(validate) {
+            setError(validate)
+            setShowError(true)
+            return
+        }
          axios.post(`${baseUrl}/promotions`,formData)
         .then(e => {
             const data = products
             const found = data.find(el => el.id == formData.product_id)
             found.promotion = formData
             setProducts([...data])
+            navigate('/promotions')
         })
         .catch(err => console.log(err))
     }
 
+    
     return (
-        <form className="flex w-1/2 flex-col mt-20 gap-5">
-            <div className="flex gap-2 items-center flex-wrap">
+        <form className="flex md:w-1/2 flex-col mt-20 gap-5 w-full px-5 md:px-0">
+            {showError &&<div className="rounded-md bg-white text-center text-red-600 py-2 mb-10"><span>{`${error}!`}</span></div>}
+            <div className="flex gap-2 items-center flex-wrap ">
                 <label>Product Name</label>
-                <select name="product_id" onChange={handleChange} id="product_id" className="text-black py-2 px-5 rounded-md">
+                <select name="product_id" onChange={handleChange} id="product_id" className="text-black py-2 px-5 rounded-md md:w-auto w-full">
                     <option key={0} value='' defaultValue hidden>Select a Product</option>
                     {products.map(e => {
                         return (
@@ -43,20 +57,20 @@ const FreeItemDiscount = ({ products,setFormData,formData,promoType,setProducts 
                 </select>
             </div>
 
-            <div className="flex gap-2 w-full">
-                <div className="flex flex-col w-1/2 gap-2">
+            <div className="flex gap-2 w-full md:flex-nowrap flex-wrap">
+                <div className="flex flex-col md:w-1/2 gap-2 w-full">
                     <label>Description</label>
                     <input name="description" onChange={handleChange} id="description" className=" text-black py-2 px-5 rounded-md"
                         placeholder="Ex. Buy 5 Take 1 for free"
                     >
                     </input>
                 </div>
-                <div className="flex flex-col w-1/2 gap-2">
+                <div className="flex flex-col md:w-1/2 gap-2 w-full gap-2">
                    <DiscountInput formData={formData} promoType={promoType} products={products} handleChange={handleChange}></DiscountInput>
                 </div>
             </div>
-            <div className="flex gap-2 w-full">
-                <div className="w-1/2 flex flex-col gap-2">
+            <div className="flex gap-2 w-full flex-wrap md:flex-nowrap">
+                <div className="md:w-1/2 w-full flex flex-col gap-2">
                     <label>
                         Promotion Trigger
                     </label>

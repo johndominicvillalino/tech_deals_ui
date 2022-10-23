@@ -33,7 +33,7 @@ export function percentDiscount(toCheck, e, trigger, promo_type) {
     if (value >= toCheck) {
 
         let instance = Math.trunc(value / toCheck)
-        let eachDiscount = ((parseInt(e.promotion.percent_discount) / 100) * e.price)
+        let eachDiscount = ((parseInt(e.promotion.percent_discount) / 100) * (toCheck * e.price))
         if (trigger == MIN_VALUE) {
             eachDiscount = ((parseInt(e.promotion.percent_discount) / 100) * toCheck)
         }

@@ -18,10 +18,10 @@ const Nav = ({ currentPage, setOpen, cartItems }) => {
                 <li><Link className="hover:text-gray-200" to="/promotions">Promotions</Link></li>
               </ul>
 
-              <button onClick={() => setOpen(true)} to='/add-item'>
+              <button className='ml-auto md:ml-0' onClick={() => setOpen(true)} to='/add-item'>
                 <div className='flex w-[150px] gap-2'>
-                  <img className='w-[25px]' src={add}></img>
-                  <span>Add Product</span>
+                  <img className='w-[25px] ml-auto md:ml-0' src={add}></img>
+                  <span className='hidden sm:block'>Add Product</span>
                 </div>
               </button>
 
@@ -38,6 +38,7 @@ const Nav = ({ currentPage, setOpen, cartItems }) => {
                 </Link>
               </div>
             </div>
+            
             <Link className="xl:hidden flex mr-6 items-center" to="/cart">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -53,6 +54,11 @@ const Nav = ({ currentPage, setOpen, cartItems }) => {
 
 
           </nav>
+
+          <ul className="text-white w-full flex items-center justify-center text-2xl md:hidden flex-wrap gap-10 ">
+                <li><Link className="hover:text-gray-200" to='/'>Products</Link></li>
+                <li><Link className="hover:text-gray-200" to="/promotions">Promotions</Link></li>
+          </ul>
 
         </section>
       </div>

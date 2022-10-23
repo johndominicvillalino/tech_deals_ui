@@ -87,12 +87,12 @@ const Cart = ({ setCurrentPage, cartItems, handleDelete,setCartItems, allProduct
                                     <td className="py-4 px-6">
                                         <span onClick={() => handleQtyChange('less',e)} className='text-2xl p-1'>-</span><span className='mx-4'>{e.qty}</span><span onClick={() => handleQtyChange('add',e)} className='text-2xl p-1'>+</span>
                                     </td>
-                                    <td>
+                                    <td className='py-4 px-6'>
                                         {priceFormat(e.price)}
                                     </td>
                                     
-                                    <td className={`${e.total == e.newTotal ? '' : 'line-through text-red-300'}`}>{priceFormat(e.total)}</td>
-                                    <td className={`${e.total == e.newTotal ? '' : 'text-green-600'}`}>{priceFormat(e.newTotal)}</td>
+                                    <td className={`${e.total == e.newTotal ? '' : 'line-through text-red-300'} py-4 px-6`}>{priceFormat(e.total)}</td>
+                                    <td className={`${e.total == e.newTotal ? '' : 'text-green-600'} py-4 px-6`}>{priceFormat(e.newTotal)}</td>
                                     <td>
                                         <img className='w-[20px] cursor-pointer fill-red-600 hover:scale-110 ease-in-out duration-300 ' src={del} onClick={() => handleDelete(e.id)} />
                                     </td>

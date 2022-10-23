@@ -1,8 +1,11 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { priceFormat } from '../helpers/functions'
+import PopUp from '../ui/PopUp'
 
 const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete }) => {
+
+    const [addItem, setAddItem] = useState('')
+    const [showPopUp, setShowPopUp] = useState(false)
 
     useEffect(() => {
 
@@ -13,6 +16,7 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete
 
     const handleQtyChange = e => {
         const {value,id} = e.target
+        setShowPopUp(false)
         if(value < 0 || value == undefined) {
             handleDelete(id)
             return
@@ -25,7 +29,9 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete
 
     const handleSendCart = e => { 
 
-        const {id} = e
+        const {id,name} = e
+        setAddItem(name)
+        setShowPopUp(true)
         setCartItems(prev => {
             const prevData = prev
             const found = prevData.find(el => el.id == id)
@@ -41,9 +47,10 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete
         })
     }
 
-
+    
     return (
         <section className="bg-white dark:bg-gray-900 h-full">
+          {showPopUp &&   <PopUp item={addItem}></PopUp> }
             <div className="container px-6 py-8 mx-auto">
                 <div className="lg:flex lg:-mx-2">
                     <div className="mt-6 lg:mt-0 lg:px-2 ">

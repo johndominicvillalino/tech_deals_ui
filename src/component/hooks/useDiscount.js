@@ -1,5 +1,5 @@
 import { percentDiscount } from "../../helpers/functions";
-import { MINIMIN_QUANTITY_PURCHASE, MIN_QUANTITY , MININUM_PURCHASE_VALUE,MIN_VALUE, PERCENT_DISCOUNT, SPECIFIC_AMOUNT_DISCOUNT,FREE_ITEM_DISCOUNT} from "../../helpers/constants";
+import { MINIMIN_QUANTITY_PURCHASE, MIN_QUANTITY , MININUM_PURCHASE_VALUE,MIN_VALUE} from "../../helpers/constants";
 
 
 
@@ -38,6 +38,7 @@ function useDiscount(items) {
             e.newTotal = e.total
             e.totalDiscount = 0
             e.eachDiscount = 0
+            return e
         }
 
 

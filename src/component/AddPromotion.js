@@ -10,9 +10,13 @@ const AddPromotion = ({ products,setProducts }) => {
 
     const [formData, setFormData] = useState(discountFormAttr)
 
+    const [error,setError] = useState('')
+
     const [promoType, setPromoType] = useState('')
+    const [showError,setShowError] = useState(false)
 
     const handlePromoTypeChange = e => {
+        setShowError(false)
         const { value } = e.target
         setPromoType(value)
         setFormData(prev => {
@@ -24,7 +28,7 @@ const AddPromotion = ({ products,setProducts }) => {
     }
 
     return (
-        <div className='h-screen bg-gray-900 flex justify-center text-white'>
+        <div className='bg-gray-900 flex justify-center text-white md:h-screen h-[800px]'>
             <div className='container mx-auto'>
 
                 <div className="overflow-x-auto relative">
@@ -41,12 +45,10 @@ const AddPromotion = ({ products,setProducts }) => {
                             <option value={PERCENT_DISCOUNT}>Percent Discount</option>
                             <option value={FREE_ITEM_DISCOUNT}>Free Item Discount</option>
                         </select>
-
-
                     </div>
 
                     <div className="flex justify-center">
-                    <FreeItemDiscount setProducts={setProducts} promoType={promoType} setFormData={setFormData} formData={formData} products={products}></FreeItemDiscount>
+                    <FreeItemDiscount setShowError={setShowError} showError={showError} error={error} setError={setError} setProducts={setProducts} promoType={promoType} setFormData={setFormData} formData={formData} products={products}></FreeItemDiscount>
                     </div>
                 </div>
             </div>

@@ -39,7 +39,6 @@ const Promotions = ({ setCurrentPage, setCartItems, setProducts, products, cartI
                     delete foundInItem.promotion
                     setProducts([...items])
                 }
-                console.log(foundInCart)
                 if (foundInCart) {
                     delete foundInCart.promotion
                     foundInCart.free_item = ''
@@ -90,8 +89,8 @@ const Promotions = ({ setCurrentPage, setCartItems, setProducts, products, cartI
                                             {e.promo_type}
                                         </td>
                                      
-                                        <td>
-                                            <img onClick={() => handleDelete(e)} className='w-[20px] cursor-pointer fill-red-600 hover:scale-110 ease-in-out duration-300 ' src={del} />
+                                        <td className="py-4 px-6">
+                                            <img onClick={() => handleDelete(e)} className='w-[20px] h-[20px] cursor-pointer fill-red-600 hover:scale-110 ease-in-out duration-300 ' src={del} />
                                         </td>
                                     </tr>
                                 )
