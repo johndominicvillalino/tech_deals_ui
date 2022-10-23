@@ -1,4 +1,4 @@
-export const baseUrl = 'http://localhost:5000'
+export const baseUrl = 'https://tranquil-bastion-84851.herokuapp.com/'
 
 
 export const discountFormAttr =  {
