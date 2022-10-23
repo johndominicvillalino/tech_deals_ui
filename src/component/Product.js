@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { priceFormat } from '../helpers/functions'
 
-const Product = ({setCartItems, setCurrentPage,products, setProduct }) => {
+const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete }) => {
 
     useEffect(() => {
 
@@ -13,10 +13,13 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct }) => {
 
     const handleQtyChange = e => {
         const {value,id} = e.target
-        if(value < 0) return;
+        if(value < 0) {
+            handleDelete(id)
+            return
+        };
         const productData = products
         const found = productData.find(el => el.id == id)
-        found.qty = value
+        found.qty = parseInt(value)
         setProduct([...productData])
     }
 
@@ -27,9 +30,12 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct }) => {
             const prevData = prev
             const found = prevData.find(el => el.id == id)
             if(found) {
-                found.qty = e.qty
+                found.qty = parseInt(e.qty)
+                found.total = e.qty * e.price
                 return [...prevData]
             } else {
+                e.total = e.qty * e.price
+                e.qty = parseInt(e.qty)
                 return [...prev,e]
             }
         })
@@ -46,7 +52,7 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct }) => {
                                 return (
                                     <div key={e.id} className="flex flex-col items-center justify-center w-full max-w-[300px] mx-auto">
                                         <img className="object-cover w-full rounded-md h-72 xl:h-80" src={require('../asset/default.jpeg')} alt="T-Shirt" />
-                                        <h4 className="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">{e.name}</h4>
+                                        <h4 className="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">{`${e.sku} - ${e.name}`}</h4>
                                         <p className="text-blue-500">{priceFormat(e.price)}</p>
 
                                         <div className='flex justify-between w-full'>

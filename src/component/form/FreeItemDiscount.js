@@ -1,8 +1,10 @@
 
 import MinInput from "./ui/MinInput"
 import DiscountInput from "./ui/DiscountInput"
+import axios from "axios"
+import { baseUrl } from "../../helpers/constants"
 
-const FreeItemDiscount = ({ products,setFormData,formData,promoType }) => {
+const FreeItemDiscount = ({ products,setFormData,formData,promoType,setProducts }) => {
 
     const handleChange = e => {
         const { value, name } = e.target
@@ -16,7 +18,14 @@ const FreeItemDiscount = ({ products,setFormData,formData,promoType }) => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log(formData)
+         axios.post(`${baseUrl}/promotions`,formData)
+        .then(e => {
+            const data = products
+            const found = data.find(el => el.id == formData.product_id)
+            found.promotion = formData
+            setProducts([...data])
+        })
+        .catch(err => console.log(err))
     }
 
     return (

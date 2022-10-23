@@ -4,7 +4,6 @@ const DiscountInput = ({ promoType, handleChange, products, formData }) => {
 
     let inputDiscount;
 
-    console.log(promoType)
 
     switch (promoType) {
         case 'Free Item Discount':
@@ -23,14 +22,14 @@ const DiscountInput = ({ promoType, handleChange, products, formData }) => {
             break;
         case 'Percent Discount':
             inputDiscount = <><label>Percent Discount</label>
-            <input name="percent_discount" id="percent_discount" className=" text-black py-2 px-5 rounded-md"
+            <input onChange={handleChange} name="percent_discount" id="percent_discount" className=" text-black py-2 px-5 rounded-md"
                 type='number'
                 placeholder="1% - 100%"
             /></>
             break;
         case 'Specific Amount discount':
             inputDiscount = <>   <label>Specific Discount Amount</label>
-            <input name="specific_discount_amount" id="specific_discount_amount" className=" text-black py-2 px-5 rounded-md"
+            <input onChange={handleChange} name="specific_discount_amount" id="specific_discount_amount" className=" text-black py-2 px-5 rounded-md"
                 type='number'
                 placeholder="0.00"
             /></>

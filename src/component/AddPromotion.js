@@ -4,7 +4,7 @@ import { useState } from "react"
 import FreeItemDiscount from "./form/FreeItemDiscount"
 import { discountFormAttr } from "../helpers/constants"
 
-const AddPromotion = ({ products }) => {
+const AddPromotion = ({ products,setProducts }) => {
 
     const [formData, setFormData] = useState(discountFormAttr)
 
@@ -16,7 +16,7 @@ const AddPromotion = ({ products }) => {
         setFormData(prev => {
             return {
                 ...prev,
-                promot_type: value
+                promo_type: value
             }
         })
     }
@@ -44,7 +44,7 @@ const AddPromotion = ({ products }) => {
                     </div>
 
                     <div className="flex justify-center">
-                    <FreeItemDiscount promoType={promoType} setFormData={setFormData} formData={formData} products={products}></FreeItemDiscount>
+                    <FreeItemDiscount setProducts={setProducts} promoType={promoType} setFormData={setFormData} formData={formData} products={products}></FreeItemDiscount>
                     </div>
                 </div>
             </div>

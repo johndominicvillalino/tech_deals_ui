@@ -5,7 +5,7 @@ import del from '../asset/delete.svg'
 import { Link } from "react-router-dom"
 
 
-const Promotions = ({ setCurrentPage, products }) => {
+const Promotions = ({ setCurrentPage }) => {
 
     const [promos, setPromos] = useState([])
     useEffect(() => {
@@ -13,7 +13,6 @@ const Promotions = ({ setCurrentPage, products }) => {
         setCurrentPage('Promotions')
         axios.get(`${baseUrl}/promotions`)
             .then(e => {
-                console.log('data')
                 setPromos(e.data)
             })
             .catch(err => {
@@ -21,12 +20,24 @@ const Promotions = ({ setCurrentPage, products }) => {
             })
     }, [])
 
-    const handleChange = (e) => {
+    const handleChange = e => {
         const { id, checked } = e.target
         const promotion = promos
         const found = promotion.find(el => el.id == id)
         found.is_active = checked
         setPromos([...promotion])
+
+    }
+
+    const handleDelete = e => {
+
+
+        axios.delete(`${baseUrl}/promotions`,{params: {id:e}})
+        .then(res => {
+            const filtered = promos.filter(el => el.id != e)
+            setPromos([...filtered])
+        })
+        .catch(err => console.log(err))
 
     }
 
@@ -66,7 +77,7 @@ const Promotions = ({ setCurrentPage, products }) => {
                                             {e.description}
                                         </th>
                                         <td className="py-4 px-6">
-                                            {e.id}
+                                            {`${e.product.sku} - ${e.product.name}`}
                                         </td>
                                         <td className="py-4 px-6">
                                             {e.promo_type}
@@ -80,7 +91,7 @@ const Promotions = ({ setCurrentPage, products }) => {
                                             ></input>
                                         </td>
                                         <td>
-                                            <img className='w-[20px] cursor-pointer fill-red-600 hover:scale-110 ease-in-out duration-300 ' src={del} />
+                                            <img onClick={()=>handleDelete(e.id)} className='w-[20px] cursor-pointer fill-red-600 hover:scale-110 ease-in-out duration-300 ' src={del} />
                                         </td>
                                     </tr>
                                 )
