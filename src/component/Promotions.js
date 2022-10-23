@@ -46,8 +46,10 @@ const Promotions = ({ setCurrentPage, setCartItems, setProducts, products, cartI
                     delete foundInItem.promotion
                     setProducts([...items])
                 }
+                console.log(foundInCart)
                 if (foundInCart) {
                     delete foundInCart.promotion
+                    foundInCart.free_item = ''
                     setCartItems([...itemInCart])
                 }
             })
