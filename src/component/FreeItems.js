@@ -7,12 +7,12 @@ const FreeItems = ({ cartItems, allProducts }) => {
     const items = freeItems.map(el => {
         const split = el.free_item.split(" ")
         const name = allProducts.find(ele => split[0] == ele.id)
-        if(!name) {
+        if (!name) {
             return []
         }
         split[0] = name.name
         return split.join(" ")
-    }) 
+    })
 
 
 
@@ -29,13 +29,16 @@ const FreeItems = ({ cartItems, allProducts }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-                                {items.map((e,i) => {
-                                    return <th key={i} className="py-4 px-6">
+                            {items.map((e, i) => {
+                                return <tr key={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {e}
-                                    </th>
-                                })}
-                            </tr>
+                                    </td>
+                                </tr>
+
+
+                            })}
+
                         </tbody>
                     </table>
                 </div>

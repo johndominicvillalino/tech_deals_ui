@@ -11,6 +11,9 @@ const Cart = ({ setCurrentPage, cartItems, handleDelete,setCartItems, allProduct
 
     useEffect(() => {
         setCurrentPage('Cart')
+        const cartItems_copy = cartItems 
+        const filtered = cartItems_copy.filter(e => e.qty > 0)
+        setCartItems([...filtered])
 
     }, [])
 

@@ -20,14 +20,7 @@ const Promotions = ({ setCurrentPage, setCartItems, setProducts, products, cartI
             })
     }, [])
 
-    const handleChange = e => {
-        const { id, checked } = e.target
-        const promotion = promos
-        const found = promotion.find(el => el.id == id)
-        found.is_active = checked
-        setPromos([...promotion])
-
-    }
+  
 
 
     const handleDelete = e => {
@@ -79,9 +72,7 @@ const Promotions = ({ setCurrentPage, setCartItems, setProducts, products, cartI
                                 <th scope="col" className="py-3 px-6">
                                     Type
                                 </th>
-                                <th scope="col" className="py-3 px-6">
-                                    Status
-                                </th>
+                               
                                 <th></th>
                             </tr>
                         </thead>
@@ -98,14 +89,7 @@ const Promotions = ({ setCurrentPage, setCartItems, setProducts, products, cartI
                                         <td className="py-4 px-6">
                                             {e.promo_type}
                                         </td>
-                                        <td className="py-4 px-6">
-                                            <input
-                                                id={e.id}
-                                                type='checkbox'
-                                                checked={e.is_active}
-                                                onChange={handleChange}
-                                            ></input>
-                                        </td>
+                                     
                                         <td>
                                             <img onClick={() => handleDelete(e)} className='w-[20px] cursor-pointer fill-red-600 hover:scale-110 ease-in-out duration-300 ' src={del} />
                                         </td>

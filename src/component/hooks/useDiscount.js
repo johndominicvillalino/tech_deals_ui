@@ -30,23 +30,10 @@ function useDiscount(items) {
                     break;
             }
 
-            switch (promo_type) {
-                case PERCENT_DISCOUNT:
-                    checker = percentDiscount(promotion[min],e,min,promo_type)
-                    return checker;
-                    break;
-                case SPECIFIC_AMOUNT_DISCOUNT:
-                    checker = percentDiscount(promotion[min],e,min,promo_type)
-                    return checker;
-                    break;
-                case FREE_ITEM_DISCOUNT:
-                    checker = percentDiscount(promotion[min],e,min,promo_type)
-                    return checker;
-                    break;
+            checker = percentDiscount(promotion[min],e,min,promo_type)
+            return checker;
             
-                default:
-                    break;
-            }
+            
         } else {
             e.newTotal = e.total
             e.totalDiscount = 0
