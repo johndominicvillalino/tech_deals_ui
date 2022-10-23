@@ -1,4 +1,5 @@
 import React from 'react'
+import { PRICE_DROP,SPECIFIC_AMOUNT_DISCOUNT,FREE_ITEM_DISCOUNT } from '../../../helpers/constants';
 
 const DiscountInput = ({ promoType, handleChange, products, formData }) => {
 
@@ -6,7 +7,7 @@ const DiscountInput = ({ promoType, handleChange, products, formData }) => {
 
 
     switch (promoType) {
-        case 'Free Item Discount':
+        case FREE_ITEM_DISCOUNT:
             inputDiscount = <><label>Free Item</label>
                 <select name="free_item" onChange={handleChange} id="free_item" className="text-black py-2 px-5 rounded-md">
                     <option key={0} value='' defaultValue hidden>Select a Product</option>
@@ -20,16 +21,16 @@ const DiscountInput = ({ promoType, handleChange, products, formData }) => {
                 </select>
             </>
             break;
-        case 'Percent Discount':
-            inputDiscount = <><label>Percent Discount</label>
-            <input onChange={handleChange} name="percent_discount" id="percent_discount" className=" text-black py-2 px-5 rounded-md"
-                type='number'
-                placeholder="1% - 100%"
-            /></>
-            break;
-        case 'Specific Amount discount':
+        case SPECIFIC_AMOUNT_DISCOUNT:
             inputDiscount = <>   <label>Specific Discount Amount</label>
             <input onChange={handleChange} name="specific_discount_amount" id="specific_discount_amount" className=" text-black py-2 px-5 rounded-md"
+                type='number'
+                placeholder="0.00"
+            /></>
+            break;
+        case PRICE_DROP:
+            inputDiscount = <>   <label>New Price</label>
+            <input onChange={handleChange} name="drop_to" id="drop_to" className=" text-black py-2 px-5 rounded-md"
                 type='number'
                 placeholder="0.00"
             /></>

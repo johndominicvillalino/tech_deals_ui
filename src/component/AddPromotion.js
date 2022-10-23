@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 
 import FreeItemDiscount from "./form/FreeItemDiscount"
-import { discountFormAttr, FREE_ITEM_DISCOUNT , SPECIFIC_AMOUNT_DISCOUNT, PERCENT_DISCOUNT} from "../helpers/constants"
+import { discountFormAttr, FREE_ITEM_DISCOUNT , SPECIFIC_AMOUNT_DISCOUNT,PRICE_DROP} from "../helpers/constants"
 
 
 
@@ -42,8 +42,8 @@ const AddPromotion = ({ products,setProducts }) => {
                         <select onChange={handlePromoTypeChange} name="promo_type" id="promo_type" className=" text-black py-2 px-5 rounded-md">
                             <option hidden value="">Select a promo Type</option>
                             <option value={SPECIFIC_AMOUNT_DISCOUNT}>Specific Amount discount</option>
-                            <option value={PERCENT_DISCOUNT}>Percent Discount</option>
                             <option value={FREE_ITEM_DISCOUNT}>Free Item Discount</option>
+                            <option value={PRICE_DROP}>Price Drop</option>
                         </select>
                     </div>
 

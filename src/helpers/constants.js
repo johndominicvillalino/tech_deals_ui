@@ -1,4 +1,4 @@
-export const baseUrl = 'https://tranquil-bastion-84851.herokuapp.com'
+export const baseUrl = 'http://localhost:5000'
 
 
 export const discountFormAttr =  {
@@ -11,7 +11,8 @@ export const discountFormAttr =  {
     trigger: '',
     specific_discount_amount: '',
     free_item: '',
-    min_value_cart:''
+    min_value_cart:'',
+    drop_to:''
 }
 
 
@@ -26,6 +27,7 @@ export const MIN_VALUE = 'min_value'
 export const PERCENT_DISCOUNT = 'Percent Discount'
 export const SPECIFIC_AMOUNT_DISCOUNT = 'Specific Amount discount'
 export const FREE_ITEM_DISCOUNT = 'Free Item Discount'
+export const PRICE_DROP = 'Price Drop'
 
 
 export  function validatePromoForm (e) {    

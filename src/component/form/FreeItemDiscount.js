@@ -50,9 +50,11 @@ const FreeItemDiscount = ({ products,setFormData,formData,promoType,setProducts,
                 <select name="product_id" onChange={handleChange} id="product_id" className="text-black py-2 px-5 rounded-md md:w-auto w-full">
                     <option key={0} value='' defaultValue hidden>Select a Product</option>
                     {products.map(e => {
+                        if('promotion' in e) return
                         return (
                             <option key={e.id} value={e.id}>{e.name}</option>
                         )
+                    
                     })}
                 </select>
             </div>
