@@ -49,7 +49,7 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete
 
     
     return (
-        <section className="bg-white dark:bg-gray-900 h-full">
+        <section className="  dark:bg-gray-900 h-full">
           {showPopUp &&   <PopUp item={addItem}></PopUp> }
             <div className="container px-6 py-8 mx-auto">
                 <div className="lg:flex lg:-mx-2">
