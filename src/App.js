@@ -19,6 +19,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState('Tech Deals')
   const [open, setOpen] = useState(false)
   const [products, setProducts] = useState([])
+  const [isLoading, setIsLoding] = useState(true)
 
 
   const handleDelete = e => {
@@ -32,6 +33,7 @@ function App() {
       .then(e => {
         const data = e.data.map(e => e.qty = 0)
         setProducts(e.data)
+        setIsLoding(false)
       })
       .catch(err => console.log(err)
       )
@@ -43,7 +45,7 @@ function App() {
       <Nav currentPage={currentPage} cartItems={cartItems} setOpen={setOpen} ></Nav>
       <AddProduct open={open} setProducts={setProducts} setOpen={setOpen}></AddProduct>
       <Routes>
-        <Route path='/' element={<Product handleDelete={handleDelete} products={products} setProduct={setProducts} setCurrentPage={setCurrentPage} setCartItems={setCartItems}></Product>}></Route>
+        <Route path='/' element={<Product isLoading={isLoading} setIsLoding={setIsLoding} handleDelete={handleDelete} products={products} setProduct={setProducts} setCurrentPage={setCurrentPage} setCartItems={setCartItems}></Product>}></Route>
         <Route path='/cart' element={<Cart allProducts={products} handleDelete={handleDelete} setCartItems={setCartItems} setCurrentPage={setCurrentPage} cartItems={cartItems}></Cart>}></Route>
         <Route path='/promotions' element={<Promotions cartItems={cartItems}  products={products} setProducts={setProducts} setCartItems={setCartItems} setCurrentPage={setCurrentPage}></Promotions>}></Route>
         <Route path='promotions/create' element={<AddPromotion setProducts={setProducts} products={products} ></AddPromotion>} ></Route>

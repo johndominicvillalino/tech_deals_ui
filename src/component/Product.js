@@ -1,23 +1,25 @@
 import { useEffect, useState } from 'react'
 import { priceFormat } from '../helpers/functions'
 import PopUp from '../ui/PopUp'
+import Spinner from '../ui/Spinner'
 
-const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete }) => {
+const Product = ({ setCartItems, setCurrentPage, products, setProduct, handleDelete,isLoading}) => {
 
     const [addItem, setAddItem] = useState('')
     const [showPopUp, setShowPopUp] = useState(false)
+   
 
     useEffect(() => {
 
         setCurrentPage('Tech Deals')
 
-  
-    },[])
+
+    }, [])
 
     const handleQtyChange = e => {
-        const {value,id} = e.target
+        const { value, id } = e.target
         setShowPopUp(false)
-        if(value < 0 || value == undefined) {
+        if (value < 0 || value == undefined) {
             handleDelete(id)
             return
         };
@@ -27,34 +29,34 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete
         setProduct([...productData])
     }
 
-    const handleSendCart = e => { 
+    const handleSendCart = e => {
 
-        const {id,name} = e
+        const { id, name } = e
         setAddItem(name)
         setShowPopUp(true)
         setCartItems(prev => {
             const prevData = prev
             const found = prevData.find(el => el.id == id)
-            if(found) {
+            if (found) {
                 found.qty = parseInt(e.qty)
                 found.total = e.qty * e.price
                 return [...prevData]
             } else {
                 e.total = e.qty * e.price
                 e.qty = parseInt(e.qty)
-                return [...prev,e]
+                return [...prev, e]
             }
         })
     }
 
-    
+
     return (
         <section className="  dark:bg-gray-900 h-full">
-          {showPopUp &&   <PopUp item={addItem}></PopUp> }
+            {showPopUp && <PopUp item={addItem}></PopUp>}
             <div className="container px-6 py-8 mx-auto">
                 <div className="lg:flex lg:-mx-2">
                     <div className="mt-6 lg:mt-0 lg:px-2 ">
-                        <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                        {!isLoading && <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                             {products.map(e => {
                                 return (
                                     <div key={e.id} className="flex flex-col items-center justify-center w-full max-w-[300px] mx-auto">
@@ -63,7 +65,7 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete
                                         <p className="text-blue-500">{priceFormat(e.price)}</p>
 
                                         <div className='flex justify-between w-full'>
-                                            <button onClick={() => handleSendCart(e)} className={`flex items-center justify-center  px-2 py-2 mt-4 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700 ${e.qty == 0 ? 'text-gray-700 pointer-events-none':''}`}>
+                                            <button onClick={() => handleSendCart(e)} className={`flex items-center justify-center  px-2 py-2 mt-4 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700 ${e.qty == 0 ? 'text-gray-700 pointer-events-none' : ''}`}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mx-1" viewBox="0 0 20 20" fill="currentColor">
                                                     <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
                                                 </svg>
@@ -72,17 +74,22 @@ const Product = ({setCartItems, setCurrentPage,products, setProduct,handleDelete
                                             <div className='flex h-full gap-2 items-end pb-2'>
                                                 <label className='text-white'>Qty</label>
                                                 <input type="number" className='w-[60px] rounded-md text-center text-sm py-1 px-2 text-white capitalize transition-colors duration-200 transform bg-gray-800 hover:bg-gray-700 focus:outline-none focus:bg-gray-700'
-                                                value={e.qty}
-                                                id={e.id}
-                                                onChange={handleQtyChange}
+                                                    value={e.qty}
+                                                    id={e.id}
+                                                    onChange={handleQtyChange}
                                                 ></input>
                                             </div>
                                         </div>
                                     </div>
                                 )
                             })}
-                        </div>
+                        </div>}
+                   
+
                     </div>
+                    {isLoading && <div className='mt-20 w-full flex justify-center'>
+                                <Spinner></Spinner>
+                    </div> }
                 </div>
             </div>
         </section>
